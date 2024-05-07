@@ -52,6 +52,16 @@ class Expenses{
     
 }
 
+//struct addView : View{
+//    
+//    
+//    var body: some View{
+//        
+//        
+//        
+//    }
+//    
+//}
 
 
 
@@ -61,6 +71,8 @@ struct ContentView: View {
     @State private var expenses = Expenses()
     
     @State private var showingAddExpense = false
+    
+    @State private var title = "Name"
     
     
     var body: some View {
@@ -103,16 +115,18 @@ struct ContentView: View {
                     .onDelete(perform: removeBusinessItem)
                 }
             }
-            .navigationTitle("IExpense")
+            .navigationTitle($title)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar{
-                Button("Add Expense", systemImage: "plus"){
-                    showingAddExpense = true
-                }
+                NavigationLink(destination: AddView(expenses: expenses)){
+                    Image(systemName: "plus")
             }
-            .sheet(isPresented: $showingAddExpense){
-                AddView(expenses: expenses)
-                
             }
+            //.navigationBarBackButtonHidden()
+//            .sheet(isPresented: $showingAddExpense){
+//                AddView(expenses: expenses)
+//                
+//            }
         }
     }
     
